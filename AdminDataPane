@@ -1,0 +1,432 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ProjectPackage;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Mason
+ */
+public class AdminDataPane extends javax.swing.JFrame {
+
+    boolean changedFromDefault = false;
+    boolean loadedFromFile = false;
+    String[] loadedValues;
+    String[] values = new String[6];
+    
+    public AdminDataPane(String[] loadedValues) {
+        initComponents();
+        try{
+                if(!loadedValues[0].equals("") || loadedValues[0] != null){
+                    this.loadedValues = loadedValues;
+                    this.loadedFromFile = true;
+
+                    nameTextField.setText(this.loadedValues[0]);
+                    rateTextField.setText(this.loadedValues[1]);
+                    dateReportedTextField.setText(this.loadedValues[2]);
+                    lastEvalTextField.setText(this.loadedValues[3]);
+                    branchTextField.setText(this.loadedValues[4]);
+                    dateOfRateTextField.setText(this.loadedValues[5]);
+                }
+        }
+        catch(NullPointerException e){
+            System.out.println("No admin data detected...");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        nameTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        rateTextField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        dateReportedTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        lastEvalTextField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        dateOfRateTextField = new javax.swing.JTextField();
+        branchTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        saveButton = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(400, 400));
+        setMinimumSize(new java.awt.Dimension(353, 311));
+        setName("Administrative Data"); // NOI18N
+        setResizable(false);
+
+        nameTextField.setText("Last, First MI.");
+        nameTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nameTextFieldMouseClicked(evt);
+            }
+        });
+        nameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Name:");
+
+        jLabel2.setText("Rate and Warfare Designator");
+
+        rateTextField.setText("Ex. IT2(IW)");
+        rateTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rateTextFieldMouseClicked(evt);
+            }
+        });
+        rateTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rateTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Branch");
+
+        jLabel5.setText("Date Reported");
+
+        dateReportedTextField.setText("DDMMMYYYY");
+        dateReportedTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateReportedTextFieldMouseClicked(evt);
+            }
+        });
+        dateReportedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateReportedTextFieldActionPerformed(evt);
+            }
+        });
+
+        lastEvalTextField.setText("DDMMMYYYY");
+        lastEvalTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lastEvalTextFieldMouseClicked(evt);
+            }
+        });
+        lastEvalTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastEvalTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Ending of Last Eval");
+
+        jLabel8.setText("Date of Rate");
+
+        dateOfRateTextField.setText("DDMMMYYYY");
+        dateOfRateTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateOfRateTextFieldMouseClicked(evt);
+            }
+        });
+        dateOfRateTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateOfRateTextFieldActionPerformed(evt);
+            }
+        });
+
+        branchTextField.setText("Ex. USN");
+        branchTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                branchTextFieldMouseClicked(evt);
+            }
+        });
+        branchTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                branchTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Administrative Data");
+
+        saveButton.setBackground(new java.awt.Color(255, 51, 51));
+        saveButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(204, 204, 204));
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(dateReportedTextField)
+                                    .addComponent(dateOfRateTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                    .addComponent(lastEvalTextField, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(branchTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rateTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameTextField))
+                                .addGap(38, 38, 38))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveButton)
+                        .addGap(38, 38, 38))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(204, 204, 204)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(saveButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(rateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(branchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(dateReportedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastEvalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(dateOfRateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>                        
+
+    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        if (this.loadedFromFile == false){
+            if (nameTextField.getText().equalsIgnoreCase("Last, First MI.")){
+                
+                nameTextField.setText("");
+            }
+        }
+        if (this.loadedFromFile == true){
+            if (nameTextField.getText().equalsIgnoreCase(this.loadedValues[0])){
+                
+                nameTextField.setText("");
+            }
+        }
+    }                                             
+
+    private void rateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        if (this.loadedFromFile == false){
+            if (rateTextField.equals("Ex. IT2(IW)")){
+                rateTextField.setText("");
+            }
+        }
+        if (this.loadedFromFile == true){
+            if (rateTextField.getText().equalsIgnoreCase(this.loadedValues[1])){
+                
+                rateTextField.setText("");
+            }
+        }
+    }                                             
+
+    private void dateReportedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+        if (this.loadedFromFile == false){
+            if (dateReportedTextField.equals("DDMMMYYYY")){
+                dateReportedTextField.setText("");
+            }
+        }
+        if (this.loadedFromFile == true){
+            if (dateReportedTextField.getText().equalsIgnoreCase(this.loadedValues[2])){
+                
+                dateReportedTextField.setText("");
+            }
+        }
+    }                                                     
+
+    private void lastEvalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        if (this.loadedFromFile == false){
+            if (lastEvalTextField.equals("DDMMMYYYY")){
+                lastEvalTextField.setText("");
+            }
+        }
+        if (this.loadedFromFile == true){
+            if (lastEvalTextField.getText().equalsIgnoreCase(this.loadedValues[3])){
+                
+                lastEvalTextField.setText("");
+            }
+        }
+    }                                                 
+
+    private void branchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        if (this.loadedFromFile == false){
+            if (branchTextField.equals("Ex. USN")){
+                branchTextField.setText("");
+            }
+        }
+        if (this.loadedFromFile == true){
+            if (branchTextField.getText().equalsIgnoreCase(this.loadedValues[4])){
+                
+                branchTextField.setText("");
+            }
+        }
+    }                                               
+
+    private void dateOfRateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        if (this.loadedFromFile == false){
+            if (dateOfRateTextField.equals("DDMMMYYYY")){
+                dateOfRateTextField.setText("");
+            }
+        }
+        if (this.loadedFromFile == true){
+            if (dateOfRateTextField.getText().equalsIgnoreCase(this.loadedValues[5])){
+                
+                dateOfRateTextField.setText("");
+            }
+        }
+    }                                                   
+    
+    boolean stillDefaults(){
+        //returns false if any values left default
+        
+        if (nameTextField.getText().equals("Last, First MI.") || rateTextField.getText().equals("Ex. IT2(IW)")
+                || dateReportedTextField.getText().equals("DDMMMYYYY") || lastEvalTextField.getText().equals("DDMMMYYYY")
+                || branchTextField.getText().equals("Ex. USN") || dateOfRateTextField.getText().equals("DDMMMYYYY")
+                //for empty
+                || nameTextField.getText().equals("") || rateTextField.getText().equals("")
+                || dateReportedTextField.getText().equals("") || lastEvalTextField.getText().equals("")
+                || branchTextField.getText().equals("") || dateOfRateTextField.getText().equals("")){
+            return true;
+        }
+        else
+            return false;
+    }
+    
+    String[] getValues(){
+        if(this.changedFromDefault == true)
+            return this.values;
+        else
+            return null;
+    }
+    
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        
+        String[] values = new String[6];
+        
+        if (!stillDefaults()){
+            values[0] = nameTextField.getText();
+            values[1] = rateTextField.getText();
+            values[2] = dateReportedTextField.getText();
+            values[3] = lastEvalTextField.getText();
+            values[4] = branchTextField.getText();
+            values[5] = dateOfRateTextField.getText();
+            this.values = values;
+            this.changedFromDefault = true;
+            System.out.println("[*] Saved Successfully.");
+            JOptionPane.showMessageDialog(rootPane, "[*] Saved Successfully.");
+            
+            for (int i = 0; i < 6; i++){
+                System.out.println(values[i]);
+            }
+        }
+        
+        else{
+            System.out.println("[*] Not saved.\nOne or more values have been left default or empty..");
+            JOptionPane.showMessageDialog(rootPane, "[*] Not saved.\nOne or more values have been left default or empty..");
+        }
+    }                                          
+
+    private void nameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {                                           
+        if (nameTextField.getText().equals("Last, First MI.")){
+            System.out.println("same");
+            nameTextField.setText("");
+        }
+    }                                          
+
+    private void rateTextFieldMouseClicked(java.awt.event.MouseEvent evt) {                                           
+        if (rateTextField.getText().equals("Ex. IT2(IW)")){
+            rateTextField.setText("");
+        }
+    }                                          
+
+    private void branchTextFieldMouseClicked(java.awt.event.MouseEvent evt) {                                             
+        if (branchTextField.getText().equals("Ex. USN")){
+            branchTextField.setText("");
+        }
+    }                                            
+
+    private void dateReportedTextFieldMouseClicked(java.awt.event.MouseEvent evt) {                                                   
+        if (dateReportedTextField.getText().equals("DDMMMYYYY")){
+            dateReportedTextField.setText("");
+        }
+    }                                                  
+
+    private void lastEvalTextFieldMouseClicked(java.awt.event.MouseEvent evt) {                                               
+        if (lastEvalTextField.getText().equals("DDMMMYYYY")){
+            lastEvalTextField.setText("");
+        }
+    }                                              
+
+    private void dateOfRateTextFieldMouseClicked(java.awt.event.MouseEvent evt) {                                                 
+        if (dateOfRateTextField.getText().equals("DDMMMYYYY")){
+            dateOfRateTextField.setText("");
+        }
+    }                                                
+
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JTextField branchTextField;
+    private javax.swing.JTextField dateOfRateTextField;
+    private javax.swing.JTextField dateReportedTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField lastEvalTextField;
+    private javax.swing.JTextField nameTextField;
+    private javax.swing.JTextField rateTextField;
+    private javax.swing.JButton saveButton;
+    // End of variables declaration                   
+}

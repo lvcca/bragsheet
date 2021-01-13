@@ -31,6 +31,17 @@ public class writeToFile {
         }
     }
     
+    void appendToFile(String text){
+        try{
+            this.myWriter = new FileWriter(myObj.getAbsoluteFile());
+            this.myWriter.append(text);
+            this.myWriter.close();
+        }
+        catch(IOException e){
+            System.out.println("Something went wrong.. " + e);
+        }
+    }
+    
     void checkFile(){
         
         try{

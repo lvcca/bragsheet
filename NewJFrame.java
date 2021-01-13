@@ -22,6 +22,8 @@ public class NewJFrame extends javax.swing.JFrame {
     String impact, startDay, startMonth, startYear, endDay, endMonth, endYear, 
             content, category;
     
+    String[] adminInfo = new String[6];
+    
     LocalDateTime dateObject = LocalDateTime.now();
     DateTimeFormatter dateObjectDay = DateTimeFormatter.ofPattern("dd");
     DateTimeFormatter dateObjectMonth = DateTimeFormatter.ofPattern("MMM");
@@ -31,6 +33,8 @@ public class NewJFrame extends javax.swing.JFrame {
     entryContainer current,tmp;
     EntryRecord record;
     ToFile toFile = new ToFile();
+    AdminToFile adminToFile = new AdminToFile();
+    AdminDataPane adminDataPane;
     writeToFile wr = new writeToFile();
     FromFile fromfile = new FromFile(wr.myObj.getAbsolutePath());
     
@@ -41,21 +45,21 @@ public class NewJFrame extends javax.swing.JFrame {
     
     ImageIcon icon = new ImageIcon("us-navy-icon-7.jpg");
     
-    String adminData = ("Administrative data:\n" +
-        "\ta.  Full Name: \n" +
-        "\tb.  Rate and warfare/qualification designators(s): \n" +
-        "\tc.  SSN: \n" +
-        "\td.  USN\n" +
-        "\te.  Date reported: \n" +
-        "\tf.  Ending date of last evaluation: \n" +
-        "\tg.  Date of rate: \n\n");
+    String adminData;
     
     public NewJFrame() {
         initComponents();
         setDefaultDateValues();
         this.fromfile.getLine();
+        
+        if (fromfile.adminDataSentinalCheck() == true){
+            this.adminInfo = fromfile.getAdminData();
+        }
+        
         this.record = this.fromfile.getRecord();
         this.pathLabel.setText(this.wr.myObj.getAbsolutePath());
+        
+        makeAdminData();
         
     }
     
@@ -70,7 +74,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         fileChooser = new javax.swing.JFileChooser();
@@ -103,6 +107,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         sortButton = new javax.swing.JButton();
+        adminDataButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("brag sheet");
@@ -239,6 +244,13 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        adminDataButton.setText("Admin Data");
+        adminDataButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminDataButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,20 +290,22 @@ public class NewJFrame extends javax.swing.JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(sameButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel3))))
+                                                .addComponent(jLabel3)))
+                                        .addGap(41, 41, 41))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(impactBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(categoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel4)
-                                                .addGap(12, 12, 12)
-                                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 8, Short.MAX_VALUE)))
-                                .addGap(41, 41, 41))
+                                                .addComponent(jLabel4))
+                                            .addComponent(impactBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(adminDataButton))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -307,7 +321,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(viewButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(viewButton, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(pathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -344,7 +358,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(impactBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(impactBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adminDataButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(categoryLabel)
@@ -369,9 +384,24 @@ public class NewJFrame extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
+    }// </editor-fold>                        
+    
+    void makeAdminData(){
+        
+        this.adminData = (
+        "Administrative data:\n" + 
+        "\ta.  Full Name: \n\t\t" + this.adminInfo[0] + "\n" +
+        "\tb.  Rate and warfare/qualification designators(s): \n\t\t" + this.adminInfo[1] + "\n" +
+        "\tc.  SSN: \n\t\t" + "\n" +
+        "\td.  Branch: \n\t\t" + this.adminInfo[4] + "\n" +
+        "\te.  Date reported: \n\t\t" + this.adminInfo[2] + "\n" +
+        "\tf.  Ending date of last evaluation: \n\t\t" + this.adminInfo[3] + "\n" +
+        "\tg.  Date of rate: \n\t\t" + this.adminInfo[5] + "\n\n"
+        );
+        
+    }
+    
+    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         
         getUpdate();
         
@@ -407,13 +437,13 @@ public class NewJFrame extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(rootPane, "Content cannot be empty.. ", "Whoops! ", JOptionPane.INFORMATION_MESSAGE, this.icon);
         }
-    }//GEN-LAST:event_createButtonActionPerformed
+    }                                            
     
-    private void monthBoxStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthBoxStartActionPerformed
+    private void monthBoxStartActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-    }//GEN-LAST:event_monthBoxStartActionPerformed
+    }                                             
 
-    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         try{
         
         JButton open = new JButton();
@@ -434,6 +464,11 @@ public class NewJFrame extends javax.swing.JFrame {
         
         this.fromfile = new FromFile(this.fileChooser.getSelectedFile().getAbsolutePath());
         fromfile.getLine();
+        
+        if (fromfile.adminDataSentinalCheck() == true){
+            this.adminInfo = fromfile.getAdminData();
+        }
+        
         this.record = fromfile.getRecord();
         
         System.out.println("Loaded File = " + this.loadedFile.getName());
@@ -448,11 +483,11 @@ public class NewJFrame extends javax.swing.JFrame {
         catch(NullPointerException e){
             System.out.println("Null Pointer Exception caught: " + e);
         }
-    }//GEN-LAST:event_loadButtonActionPerformed
+    }                                          
     
     void getUpdate(){
         try{
-            if(!this.modrecgui.update().record.equals(null)){
+            if(this.modrecgui.update().record != null){
                 this.record = this.modrecgui.update();    
             }
             else{
@@ -464,7 +499,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }
     
-    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
         getUpdate();
         
@@ -473,36 +508,50 @@ public class NewJFrame extends javax.swing.JFrame {
         this.test.catagorize();
         this.test.testContents();
         
-        
         JOptionPane.showMessageDialog(rootPane, test.grabValues(), "Current Record..", JOptionPane.INFORMATION_MESSAGE, this.icon);
         
-        
-    }//GEN-LAST:event_viewButtonActionPerformed
+    }                                          
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
         getUpdate();
         
         String tmp = "";
         String tmp2 = "";
+        String tmp3 = "";
+        
+        if (this.adminDataPane.changedFromDefault == true){
+            System.out.println("adminDataPane changed from default...");
+            this.adminInfo = this.adminDataPane.getValues();
+            
+            if (adminInfo[0] != null && adminInfo[1] != null && adminInfo[2] != null
+                && adminInfo[3] != null && adminInfo[4] != null && adminInfo[5] != null
+                ){
 
-       
+                tmp3 = adminToFile.formatText(adminInfo);
+                System.out.println(tmp);
+            }
+        }
         
         for(entryContainer cont : this.record.record){
             tmp = toFile.formatText(cont);
             System.out.println(tmp);
             tmp2 += tmp;
         }
-        wr.writeOut(tmp2);
+        tmp3 += tmp2;
+        wr.writeOut(tmp3);
         System.out.println("The current record size " + this.record.record.size());
         
-    }//GEN-LAST:event_saveButtonActionPerformed
+        tmp = "";
+        
+        
+    }                                          
 
-    private void impactBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_impactBoxActionPerformed
+    private void impactBoxActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }//GEN-LAST:event_impactBoxActionPerformed
+    }                                         
 
-    private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyButtonActionPerformed
+    private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         try{
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -516,13 +565,13 @@ public class NewJFrame extends javax.swing.JFrame {
         finally{
             System.out.println("TEST");
         }
-    }//GEN-LAST:event_modifyButtonActionPerformed
+    }                                            
 
-    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
 
         try{
             getUpdate();
-            
+            makeAdminData();
             this.test = new OutputText();
             this.test.setRecord(this.record);
             this.test.catagorize();
@@ -537,9 +586,9 @@ public class NewJFrame extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println("Something went wrong.." + e);
         }
-    }//GEN-LAST:event_exportButtonActionPerformed
+    }                                            
 
-    private void sameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sameButtonActionPerformed
+    private void sameButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
         try{
             this.dayBoxEnd.setSelectedItem(this.dayBoxStart.getSelectedItem());
@@ -548,15 +597,25 @@ public class NewJFrame extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Exception thrown from " + e);
         }
-    }//GEN-LAST:event_sameButtonActionPerformed
+    }                                          
 
-    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         setDefaultDateValues();
-    }//GEN-LAST:event_resetButtonActionPerformed
+    }                                           
 
-    private void sortButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortButtonActionPerformed
+    private void sortButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         JOptionPane.showMessageDialog(rootPane, "This feature has not been finished.");
-    }//GEN-LAST:event_sortButtonActionPerformed
+    }                                          
+
+    private void adminDataButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        adminDataPane = new AdminDataPane(this.adminInfo);
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                adminDataPane.setVisible(true);
+            }
+        });
+    }                                               
 
     /**
      * @param args the command line arguments
@@ -602,7 +661,8 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton adminDataButton;
     private javax.swing.JComboBox<String> categoryBox;
     private javax.swing.JLabel categoryLabel;
     private javax.swing.JButton createButton;
@@ -633,5 +693,5 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> yearBoxEnd;
     private javax.swing.JComboBox<String> yearBoxStart;
     private javax.swing.JLabel yearFormatLabel;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

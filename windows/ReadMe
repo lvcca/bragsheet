@@ -1,2 +1,5 @@
-#Ready to use Jar
-#Run Jar within a /bragsheet directory
+Ready to use Jar for Windows
+Run Jar within a /bragsheet directory
+
+bragsheet.bragsheet file will be created, within current directory, for persistent data
+output files will be exported to record.txt
